@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 const initialGameBoard = [
   [null, null, null],
   [null, null, null],
@@ -5,6 +7,13 @@ const initialGameBoard = [
 ];
 
 export default function GameBoard() {
+  const [gameBoard, setGameBoard] = useState(initialGameBoard);
+
+  // This will be a fn placeholder for the callback handler whenever a player clicked or choose a grid in gameboard.
+  const handleSelectSquare = function (e) {
+    console.log(e);
+  };
+
   return (
     <ol id="game-board">
       {initialGameBoard.map((row, rowIndex) => (
