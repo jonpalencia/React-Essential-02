@@ -3,9 +3,32 @@ import Player from './components/Player';
 import GameBoard from './components/GameBoard';
 
 function App() {
-  const [activePlayer, setactivePlayer] = useState('X');
+  const [activePlayer, setActivePlayer] = useState('X');
+  const [gameTurns, setGameTurns] = useState([]);
   const onSelectSquare = function () {
-    setactivePlayer(prevSelect => (prevSelect === 'X' ? 'O' : 'X'));
+    // setActivePlayer(prevSelect => (prevSelect === 'X' ? 'O' : 'X'));
+  };
+
+  const handleSelectSquare = function (rowIndex, colIndex) {
+    setActivePlayer(currActive => (currActive === 'X' ? 'O' : 'X'));
+
+    setGameTurns(prevTurn => {
+      let currPlayer = 'X';
+      if (prevTurn.length > 0 && prevTurn[0].player === 'X') currPlayer = 'O';
+
+      const updatedTurns = [
+        {
+          square: {
+            row: rowIndex,
+            col: colIndex,
+          },
+          player: currPlayer,
+        },
+        ...prevTurn,
+      ];
+
+      return updatedTurns;
+    });
   };
 
   return (
@@ -24,8 +47,10 @@ function App() {
           />
         </ol>
         <GameBoard
-          selectHandler={onSelectSquare}
+          // selectHandler={onSelectSquare}
           activePlayerSymbol={activePlayer}
+          onSelectSquare={handleSelectSquare}
+          turns={gameTurns}
         />
       </div>
     </menu>
