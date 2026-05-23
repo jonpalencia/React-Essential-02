@@ -6,24 +6,20 @@ const initialGameBoard = [
   [null, null, null],
 ];
 
-export default function GameBoard() {
+export default function GameBoard({ selectHandler, activePlayerSymbol }) {
   const [gameBoard, setGameBoard] = useState(initialGameBoard);
 
   // This will be a fn placeholder for the callback handler whenever a player clicked or choose a grid in gameboard.
   const handleSelectSquare = function (e) {
-    console.log(e.target.dataset);
     const { row, col } = e.target.dataset;
     setGameBoard(prevGameBoard => {
       const updatedGameBoard = [
         ...prevGameBoard.map(innerArr => [...innerArr]),
       ];
-      updatedGameBoard[row][col] = 'X';
-      console.log('srcArr', initialGameBoard);
-      console.log('updatedNewArr', updatedGameBoard);
-
-      // console.log(row, col);
+      updatedGameBoard[row][col] = activePlayerSymbol;
       return updatedGameBoard;
     });
+    selectHandler();
   };
 
   return (
