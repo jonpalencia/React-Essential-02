@@ -13,17 +13,22 @@ export default function GameBoard() {
   const handleSelectSquare = function (e) {
     console.log(e.target.dataset);
     const { row, col } = e.target.dataset;
-    setGameBoard(prevBoard => {
-      const updatedBoard = [...prevBoard];
-      updatedBoard[row][col] = 'X';
-      console.log(row, col);
-      return updatedBoard;
+    setGameBoard(prevGameBoard => {
+      const updatedGameBoard = [
+        ...prevGameBoard.map(innerArr => [...innerArr]),
+      ];
+      updatedGameBoard[row][col] = 'X';
+      console.log('srcArr', initialGameBoard);
+      console.log('updatedNewArr', updatedGameBoard);
+
+      // console.log(row, col);
+      return updatedGameBoard;
     });
   };
 
   return (
     <ol id="game-board">
-      {initialGameBoard.map((row, rowIndex) => (
+      {gameBoard.map((row, rowIndex) => (
         <li key={rowIndex}>
           <ol>
             {row.map((playerSymbol, colIndex) => (
