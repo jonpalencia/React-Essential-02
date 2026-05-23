@@ -10,18 +10,12 @@ const deriveStatePlayer = function (prevTurn) {
 };
 
 function App() {
-  // const [activePlayer, setActivePlayer] = useState('X');
   const [gameTurns, setGameTurns] = useState([]);
-  const activePlayer = deriveStatePlayer('X');
+  const activePlayer = deriveStatePlayer(gameTurns);
 
   const handleSelectSquare = function (rowIndex, colIndex) {
-    // setActivePlayer(currActive => (currActive === 'X' ? 'O' : 'X'));
-
     setGameTurns(prevTurn => {
-      // let currPlayer = 'X';
-      // if (prevTurn.length > 0 && prevTurn[0].player === 'X') currPlayer = 'O';
       const currPlayer = deriveStatePlayer(prevTurn);
-
       const updatedTurns = [
         {
           square: {
@@ -32,7 +26,6 @@ function App() {
         },
         ...prevTurn,
       ];
-
       return updatedTurns;
     });
   };
