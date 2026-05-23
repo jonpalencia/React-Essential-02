@@ -5,9 +5,6 @@ import GameBoard from './components/GameBoard';
 function App() {
   const [activePlayer, setActivePlayer] = useState('X');
   const [gameTurns, setGameTurns] = useState([]);
-  const onSelectSquare = function () {
-    // setActivePlayer(prevSelect => (prevSelect === 'X' ? 'O' : 'X'));
-  };
 
   const handleSelectSquare = function (rowIndex, colIndex) {
     setActivePlayer(currActive => (currActive === 'X' ? 'O' : 'X'));
@@ -47,7 +44,6 @@ function App() {
           />
         </ol>
         <GameBoard
-          // selectHandler={onSelectSquare}
           activePlayerSymbol={activePlayer}
           onSelectSquare={handleSelectSquare}
           turns={gameTurns}

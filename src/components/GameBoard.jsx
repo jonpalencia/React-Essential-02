@@ -15,21 +15,6 @@ export default function GameBoard({ onSelectSquare, turns }) {
     gameBoard[row][col] = player;
   });
 
-  // const [gameBoard, setGameBoard] = useState(initialGameBoard);
-  // This will be a fn placeholder for the callback handler whenever a player clicked or choose a grid in gameboard.
-  // const handleSelectSquare = function (e) {
-  //   const { row, col } = e.target.dataset;
-  //   if (gameBoard[row][col]) return; // This will prevent to click the already selected square which previously selected by a player.
-  //   setGameBoard(prevGameBoard => {
-  //     const updatedGameBoard = [
-  //       ...prevGameBoard.map(innerArr => [...innerArr]),
-  //     ];
-  //     updatedGameBoard[row][col] = activePlayerSymbol;
-  //     return updatedGameBoard;
-  //   });
-  //   selectHandler();
-  // };
-
   return (
     <ol id="game-board">
       {gameBoard.map((row, rowIndex) => (
