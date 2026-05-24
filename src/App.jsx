@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Player from './components/Player';
 import GameBoard from './components/GameBoard';
 import Log from './components/Log';
+import GameOver from './components/GameOver';
 import { WINNING_COMBINATIONS } from './winning_combination';
 
 const initialGameBoard = [
@@ -17,10 +18,15 @@ const deriveStatePlayer = function (prevTurn) {
 };
 
 function App() {
+  const [player, setPlayer] = useState({
+    x: 'Player 1',
+    o: 'Player 2',
+  });
   const [gameTurns, setGameTurns] = useState([]);
   const activePlayer = deriveStatePlayer(gameTurns);
 
-  let gameBoard = initialGameBoard;
+  // More modern way of cloning or creating a deep copy of a nested array or object.
+  let gameBoard = structuredClone(initialGameBoard); //[...initialGameBoard.map(row => [...row])];
 
   gameTurns.forEach(turn => {
     const {square: {row, col}, player} = turn; // prettier-ignore
@@ -40,6 +46,10 @@ function App() {
     )
       winner = firstSquareCombination;
   });
+  const hasDraw = gameTurns.length === 9 && !winner;
+  const handleRematch = function () {
+    setGameTurns([]);
+  };
 
   const handleSelectSquare = function (rowIndex, colIndex) {
     setGameTurns(prevTurn => {
@@ -73,7 +83,9 @@ function App() {
             isActive={activePlayer === 'O'}
           />
         </ol>
-        {winner && <p>Player {winner} has won the game! 🥳</p>}
+        {(winner || hasDraw) && (
+          <GameOver result={winner} onRematch={handleRematch} />
+        )}
         <GameBoard
           activePlayerSymbol={activePlayer}
           onSelectSquare={handleSelectSquare}
