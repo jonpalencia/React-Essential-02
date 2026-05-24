@@ -18,9 +18,9 @@ const deriveStatePlayer = function (prevTurn) {
 };
 
 function App() {
-  const [player, setPlayer] = useState({
-    x: 'Player 1',
-    o: 'Player 2',
+  const [playerName, setPlayerName] = useState({
+    X: 'Player 1',
+    O: 'Player 2',
   });
   const [gameTurns, setGameTurns] = useState([]);
   const activePlayer = deriveStatePlayer(gameTurns);
@@ -44,11 +44,16 @@ function App() {
       firstSquareCombination === secondSquareCombination &&
       firstSquareCombination === thirdSquareCombination
     )
-      winner = firstSquareCombination;
+      winner = playerName[firstSquareCombination].toUpperCase();
   });
   const hasDraw = gameTurns.length === 9 && !winner;
   const handleRematch = function () {
     setGameTurns([]);
+  };
+  const handleNameChange = function (symbol, newName) {
+    setPlayerName(prevName => {
+      return { ...prevName, [symbol]: newName };
+    });
   };
 
   const handleSelectSquare = function (rowIndex, colIndex) {
@@ -73,11 +78,13 @@ function App() {
       <div id="game-container">
         <ol className="highlight-player" id="players">
           <Player
+            onChangeName={handleNameChange}
             initialName="Player 1"
             symbol="X"
             isActive={activePlayer === 'X'}
           />
           <Player
+            onChangeName={handleNameChange}
             initialName="Player 2"
             symbol="O"
             isActive={activePlayer === 'O'}

@@ -1,9 +1,17 @@
 import { useState } from 'react';
 
-export default function Player({ initialName, symbol, isActive }) {
+export default function Player({
+  onChangeName,
+  initialName,
+  symbol,
+  isActive,
+}) {
   const [playerName, setPlayerName] = useState(initialName); // player's Name state which sets the name of each player
   const [isEditing, setIsEditing] = useState(false);
-  const handleClick = () => setIsEditing(prevState => !prevState);
+  const handleEditClick = function () {
+    setIsEditing(prevState => !prevState);
+    if (isEditing) onChangeName(symbol, playerName);
+  };
   const handleChange = function (e) {
     setPlayerName(prevName => (prevName = e.target.value));
   };
@@ -26,7 +34,7 @@ export default function Player({ initialName, symbol, isActive }) {
         {editablePlayerName}
         <span className="player-symbol">{symbol}</span>
       </span>
-      <button onClick={handleClick}>{isEditing ? 'Save' : 'Edit'}</button>
+      <button onClick={handleEditClick}>{isEditing ? 'Save' : 'Edit'}</button>
     </li>
   );
 }
