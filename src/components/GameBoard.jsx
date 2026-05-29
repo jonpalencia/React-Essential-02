@@ -1,10 +1,6 @@
 import { useState } from 'react';
 
-export default function GameBoard({
-  activePlayerSymbol,
-  onSelectSquare,
-  board,
-}) {
+export default function GameBoard({ onSelectSquare, board }) {
   return (
     <ol id="game-board">
       {board.map((row, rowIndex) => (
