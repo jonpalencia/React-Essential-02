@@ -1,11 +1,7 @@
 import { useState } from 'react';
 
-export default function Player({
-  onChangeName,
-  initialName,
-  symbol,
-  isActive,
-}) {
+export default function Player(props) {
+  const { onChangeName, initialName, symbol, isActive } = props;
   const [playerName, setPlayerName] = useState(initialName); // player's Name state which sets the name of each player
   const [isEditing, setIsEditing] = useState(false);
   const handleEditClick = function () {
