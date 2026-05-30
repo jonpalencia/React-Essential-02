@@ -17,7 +17,7 @@ const deriveStatePlayer = function (prevTurn) {
   return updatedPlayer;
 };
 
-function App() {
+export default function App() {
   const [playerName, setPlayerName] = useState({
     X: 'Player 1',
     O: 'Player 2',
@@ -103,5 +103,3 @@ function App() {
     </menu>
   );
 }
-
-export default App;
