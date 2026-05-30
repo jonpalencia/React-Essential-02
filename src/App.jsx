@@ -25,8 +25,8 @@ export default function App() {
   const [gameTurns, setGameTurns] = useState([]);
   const activePlayer = deriveStatePlayer(gameTurns);
 
-  // More modern way of cloning or creating a deep copy of a nested array or object.
-  let gameBoard = structuredClone(initialGameBoard); //[...initialGameBoard.map(row => [...row])];
+  // More modern way of cloning or creating a deep copy of a nested array or object. Using the structuredClone(object) method
+  let gameBoard = [...initialGameBoard.map(arr => [...arr])];
 
   gameTurns.forEach(turn => {
     const {square: {row, col}, player} = turn; // prettier-ignore
